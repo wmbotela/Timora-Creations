@@ -1,0 +1,9 @@
+.landing{
+  background-image: url("/images/timora2.jpg");
+  height: 650px;
+  background: cover;
+}
+
+.pageb{
+  background-image: url("/images/timora3.jpg");
+}
