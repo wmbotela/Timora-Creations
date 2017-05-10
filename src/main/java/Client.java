@@ -1,6 +1,6 @@
 import java.util.List;
 
-// Client properties
+// Client class properties
 public class Client{
   private int id =0;
   private int stylistid = 0;
