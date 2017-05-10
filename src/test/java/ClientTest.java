@@ -1,115 +1,77 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Date;
+import org.sql2o.*;
 
 public class ClientTest {
-  private Client client;
-  private Client client2;
 
-
-  @Test
-  public void Client_instantiates_true(){
-    assertEquals(true, client instanceof Client);
+  @Before
+  public void initialize() {
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
   }
 
-  @Test
-  public void getStylistId_returnsCorrectId_String() {
-    assertEquals(1, client.getStylistId());
-  }
-  @Test
-  public void setStylistId_updatesStylistId_int() {
-    client2.setStylistId(2);
-    assertEquals(2, Client.find(client2.getId()).getStylistId());
+  @After
+  public void tearDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String delete = "DELETE FROM clients *;";
+      con.createQuery(delete).executeUpdate();
+    }
   }
 
   @Test
-  public void getFirstName_returnsCorrectName_String() {
-    assertEquals("Kim", client.getFirstName());
+  public void getId_returnsClientId_true() {
+    Client newClient = new Client("Client", 1);
+    newClient.save();
+    assertTrue(newClient.getId() > 0);
   }
+
   @Test
-  public void setFristName_updatesName_String() {
-    client2.setFirstName("Kanye");
-    assertEquals("Kanye", Client.find(client2.getId()).getFirstName());
+  public void getName_returnsCorrectName_true() {
+    Client newClient = new Client("Client", 1);
+    assertTrue(newClient.getName().equals("Client"));
   }
+
   @Test
-  public void getLastName_returnsCorrectName_String() {
-    assertEquals("West", client.getLastName());
+  public void client_instantiatesCorrectly_true() {
+    Client newClient = new Client("Client", 1);
+    assertTrue(newClient instanceof Client);
   }
+
   @Test
-  public void setLastName_updatesName_String() {
-    client2.setFirstName("West");
-    assertEquals("West", Client.find(client2.getId()).getFirstName());
+  public void save_savesNewClient_true() {
+    Client newClient = new Client("Client", 1);
+    newClient.save();
+    assertTrue((Client.all().size() > 0));
   }
+
   @Test
-  public void getPhoneNumber_returnsCorrectPhoneNumber_String() {
-    assertEquals("0724556677", client.getPhoneNumber());
+  public void delete_deletesAllClients() {
+    Client newClient = new Client("Client", 1);
+    newClient.save();
+    Client.delete();
+    assertTrue(Client.all().size() == 0);
   }
+
   @Test
-  public void setPhoneNumber_updatesPhoneNumber_String() {
-    client2.setPhoneNumber("0724445566");
-    assertEquals("0724445566", Client.find(client2.getId()).getPhoneNumber());
+  public void all_findsAllClients_true() {
+    Client newClient = new Client("Client", 1);
+    newClient.save();
+    assertTrue(Client.all().get(0).equals(newClient));
   }
+
   @Test
-  public void getEmail_returnsCorrectEmail_String() {
-    assertEquals("kimk@gmail.com", client.getEmail());
+  public void find_findsClient_true() {
+    Client newClient = new Client("Client", 1);
+    newClient.save();
+    assertTrue(newClient.equals(Client.find(newClient.getId())));
   }
+
   @Test
-  public void setEmail_updatesEmail_String() {
-    client2.setEmail("Kanye@gmail.com");
-    assertEquals("kanye@gmail.com", Client.find(client2.getId()).getEmail());
+  public void editClient_editsClients_true() {
+    Client newClient = new Client("Client", 1);
+    newClient.save();
+    newClient.editClient("Customer");
+    assertTrue(Client.all().get(0).equals(newClient));
   }
-  @Test
-  public void getAge_returnsCorrectAge_String() {
-    assertEquals(35, client.getAge());
-  }
-  @Test
-  public void setFristAge_updatesAge_int() {
-    client2.setAge(40);
-    assertEquals(40, Client.find(client2.getId()).getAge());
-  }
-  @Test
-  public void getNotes_returnsCorrectNotes_String() {
-    assertEquals("preference", client.getNotes());
-  }
-  @Test
-  public void setNotes_updatesNotes_String() {
-    client2.setNotes("allergies");
-    assertEquals("allergies", Client.find(client2.getId()).getNotes());
-  }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
