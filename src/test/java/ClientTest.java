@@ -4,12 +4,13 @@ import java.util.Date;
 import org.sql2o.*;
 
 public class ClientTest {
-
+//Instructs clientTest to use db hair_salon_test
   @Before
   public void initialize() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", "william", "password");
   }
 
+// Deleltes db after test run
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
@@ -20,33 +21,38 @@ public class ClientTest {
 
   @Test
   public void getId_returnsClientId_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     newClient.save();
     assertTrue(newClient.getId() > 0);
   }
 
   @Test
   public void getName_returnsCorrectName_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     assertTrue(newClient.getName().equals("Client"));
+  }
+  @Test
+  public void getEmail_returnsCorrectEmail_true(){
+    Client newClient = new Client("Client","email",1);
+    assertTrue(newClient.getEmail().equals("email"));
   }
 
   @Test
   public void client_instantiatesCorrectly_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     assertTrue(newClient instanceof Client);
   }
 
   @Test
   public void save_savesNewClient_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     newClient.save();
     assertTrue((Client.all().size() > 0));
   }
 
   @Test
   public void delete_deletesAllClients() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     newClient.save();
     Client.delete();
     assertTrue(Client.all().size() == 0);
@@ -54,21 +60,21 @@ public class ClientTest {
 
   @Test
   public void all_findsAllClients_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     newClient.save();
     assertTrue(Client.all().get(0).equals(newClient));
   }
 
   @Test
   public void find_findsClient_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     newClient.save();
     assertTrue(newClient.equals(Client.find(newClient.getId())));
   }
 
   @Test
   public void editClient_editsClients_true() {
-    Client newClient = new Client("Client", 1);
+    Client newClient = new Client("Client","email", 1);
     newClient.save();
     newClient.editClient("Customer");
     assertTrue(Client.all().get(0).equals(newClient));

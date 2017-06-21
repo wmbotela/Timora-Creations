@@ -1,0 +1,11 @@
+<h3>$client.getName()</h3>
+
+<form action="/clients/$client.getId()/edit_client" method="post">
+  <label for="edit_name">Client Name: </label>
+  <input type="text" class="form-control" name="edit_name" value="$client.getName()">
+  <br>
+  <button type="submit" class="btn btn-sm btn-danger">Edit Client</button></br>
+ </form>
+ <form action="/client/$client.getId()/delete" method="post">
+  <button type="submit" name="button">Delete Client</button>
+</form>

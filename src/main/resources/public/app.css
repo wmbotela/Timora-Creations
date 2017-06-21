@@ -2,15 +2,16 @@
   background-image: url("/images/timora2.jpg")no-repeat center fixed;
   height: 650px;
   background-size: cover;
-  text-align: center;
+  /*text-align: center;*/
   font-family: serif;
 
 }
 h1{
-  color: white;
+  color: black;
+  text-align: center;
 }
 h2{
-  color: white;
+  color:black ;
 }
 
 .pageb{

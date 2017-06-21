@@ -6,10 +6,12 @@ import org.sql2o.*;
 public class Client {
   private int id;
   private String name;
+  private String email;
   private int stylist_id;
 
-  public Client(String name, int stylistid) {
+  public Client(String name, String email,int stylistid) {
     this.name = name;
+    this.email = email;
     this.stylist_id = stylistid;
   }
 
@@ -19,6 +21,10 @@ public class Client {
 
   public String getName() {
     return this.name;
+  }
+
+  public String getEmail(){
+    return this.email;
   }
 
   public int getStylist_id() {

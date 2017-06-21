@@ -30,7 +30,9 @@ public class App {
     post("/stylists/new_stylist", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String stylistName = request.queryParams("name");
-      Stylist newStylist = new Stylist(stylistName);
+      String stylistEmail = request.queryParams("email");
+      int stylistExperience = Integer.parseInt(request.queryParams("experience"));
+      Stylist newStylist = new Stylist(stylistName, stylistEmail,stylistExperience);
       newStylist.save();
       String url = String.format("/");
       response.redirect(url);
@@ -47,10 +49,11 @@ public class App {
     post("/clients/new_client", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String clientName = request.queryParams("name");
+      String clientEmail = request.queryParams("email");
       int testStylistId = Integer.parseInt(request.queryParams("stylist"));
-      Client newClient = new Client(clientName, testStylistId);
+      Client newClient = new Client(clientName, clientEmail, testStylistId);
       newClient.save();
-      String url = String.format("/stylists/%d", testStylistId);
+      String url = String.format("/stylists/%d/clients/%d", clientEmail,testStylistId);
       response.redirect(url);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -82,8 +85,9 @@ public class App {
     post("/stylists/:id/clients/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String clientName = request.queryParams("name");
+      String clientEmail = request.queryParams("email");
       int stylistId = Integer.parseInt(request.params(":id"));
-      Client newClient = new Client(clientName, stylistId);
+      Client newClient = new Client(clientName, clientEmail, stylistId);
       newClient.save();
       String url = String.format("/stylists/%d", stylistId);
       response.redirect(url);

@@ -6,9 +6,13 @@ import org.sql2o.*;
 public class Stylist {
   private int id;
   private String name;
+  private String email;
+  private int experience;
 
-  public Stylist(String name) {
+  public Stylist(String name, String email, int experience) {
     this.name = name;
+    this.email = email;
+    this.experience = experience;
   }
 
   public int getId() {
@@ -17,6 +21,12 @@ public class Stylist {
 
   public String getName() {
     return this.name = name;
+  }
+  public String getEmail(){
+    return this.email = email;
+  }
+  public int getExperience(){
+    return this.experience = experience;
   }
 
   public void save() {

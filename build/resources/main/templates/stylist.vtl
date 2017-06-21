@@ -1,24 +1,16 @@
-<div class="row">
-  <div class="col-xs-8">
-    <h2>Our Stylists</h2>
-    #foreach($stylist in $stylists)
-      <div>
-        <h3><a href="/stylists/$stylist.getId()">$stylist.getName()</a></h3>
-      </div>
-    #end
-  </div>
-  <div class="col-xs-4">
-    #if($stylist)
-    <h2>Stylist Added</h2>
-    <p>$stylist</p>
-    #end
-    <h2>Add Stylist</h2>
-    <form action='/stylists' method="post">
-      <div class="form-group">
-        <label for="stylist">Stylist: </label>
-        <input id="stylist" name="stylist" class="form-control" type="text">
-      </div>
-      <button type='submit' class='btn'>Add Stylist!</button>
-    </form>
-  </div>
-</div>
+<h3>Stylist Name: </h3>
+<h4>$stylist.getName()</h4>
+<ul>
+<h3>Client List: </h3>
+#if($clients.size() > 0)
+  #foreach ($client in $clients)
+    <li><a href="/client/$client.getId()">$client.getName()</a></li>
+  #end
+#else
+  <p>None</p>
+#end
+</ul>
+<p><a href="$stylist.getId()/clients/new">Add Client to Stylist</a>
+<br>
+<a href="$stylist.getId()/edit_stylist">Update Stylist Information</a>
+<br>

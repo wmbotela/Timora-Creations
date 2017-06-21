@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="StylistTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-06-20T23:41:13" hostname="BiggWilly" time="0.595">
+  <properties/>
+  <testcase name="stylist_instantiatesCorrectly_true" classname="StylistTest" time="0.163"/>
+  <testcase name="all_findsAllStylists_true" classname="StylistTest" time="0.215"/>
+  <testcase name="delete_remvoesAllStylists" classname="StylistTest" time="0.069"/>
+  <testcase name="getId_returnsStylistId_true" classname="StylistTest" time="0.022"/>
+  <testcase name="find_findsStylist_true" classname="StylistTest" time="0.042"/>
+  <testcase name="editStylist_editsStylist_true" classname="StylistTest" time="0.044"/>
+  <testcase name="save_savesNewStyist_true" classname="StylistTest" time="0.032"/>
+  <testcase name="getName_FindsCorrectName_true" classname="StylistTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

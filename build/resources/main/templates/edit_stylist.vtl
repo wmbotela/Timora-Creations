@@ -1,0 +1,12 @@
+<h3>$stylist.getName()</h3>
+
+<form action="/stylists/$stylist.getId()/edit_stylist" method="post">
+  <label for="edit_name">Stylist Name: </label>
+  <input type="text" class="form-control" name="edit_name" value="$stylist.getName()">
+
+  <br>
+  <button type="submit" class="btn btn-sm btn-danger">Edit Stylist</button></br>
+</form>
+<form action="/stylist/$stylist.getId()/delete" method="post">
+  <button type="submit" name="button">Delete Stylist</button>
+</form>
